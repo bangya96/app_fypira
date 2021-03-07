@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Make Appointment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="submit(form)" method="post">
+    <ion-item>
+      <ion-label>Please Select Date</ion-label>
+      <ion-datetime ngModel displayFormat="DD MM YY" placeholder="Select Date" name="date" required></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Please Select Hour</ion-label>
+      <ion-datetime ngModel displayFormat="h:mm A" minuteValues="0,30" name="time" required type="time"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Please Select Service</ion-label>
+      <ion-select ngModel value="bekam" okText="Okay" cancelText="Dismiss" name="service" required>
+        <ion-select-option value="bekam">Bekam</ion-select-option>
+        <ion-select-option value="akupuntur">Akupuntur</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" type="submit">Book Appointment</ion-button>
+  </form>
+
+</ion-content>

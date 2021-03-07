@@ -1,0 +1,30 @@
+<ion-content>
+  <div class="top">
+    <div>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
+    </div>
+  </div>
+  <div class="content">
+    <ion-avatar class="avatar">
+      <ion-img src="{{user['profile_pic']}}"></ion-img>
+    </ion-avatar>
+
+    <div class="profile">
+      <div class="data">
+        <p>Name : {{user['name']}}</p>
+        <hr>
+        <p>Username : {{user['username']}}</p>
+        <hr>
+        <p>Email : {{user['email']}}</p>
+        <hr>
+        <p>Address : {{user['address1']}}, {{user['address2']}}, {{user['poscode']}}, {{user['city']}}, {{user['state']}}</p>
+        <hr>
+        <p>Mobile : {{user['tel_mobile']}}</p>
+        <hr>
+        <p>Gender : {{user['gender']}}</p>
+      </div>
+    </div>
+  </div>
+</ion-content>
