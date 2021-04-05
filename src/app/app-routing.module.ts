@@ -27,6 +27,11 @@ const routes: Routes = [
     path: 'appointment',
     loadChildren: () => import('./appointment/appointment.module').then( m => m.AppointmentPageModule), canActivate: [AuthGuard]
   },
+  {
+    path: 'history',
+    loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule), canActivate: [AuthGuard]
+  },
+
 
 ];
 

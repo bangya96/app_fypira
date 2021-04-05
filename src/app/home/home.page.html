@@ -18,13 +18,17 @@
   </div>
   <div class="bar">
     <ion-row>
-      <div class="bar-list" (click)="profile()">
+      <div class="bar-list" (click)="profile()" *ngIf="user['roles'] === 'user'">
         <ion-img class="bar-icon" src="assets/icon/Apps-02.png" ></ion-img>
         <p class="p-icon bold">Profile</p>
       </div>
-      <div class="bar-list" (click)="appointment()">
+      <div class="bar-list" (click)="appointment()" *ngIf="user['roles'] === 'user'">
         <ion-img class="bar-icon" src="assets/icon/Apps-03.png"></ion-img>
         <p class="p-icon bold">Appointment</p>
+      </div>
+      <div class="bar-list" (click)="history()" *ngIf="user['roles'] === 'admin'">
+        <ion-img class="bar-icon" src="assets/icon/Apps-04.png"></ion-img>
+        <p class="p-icon bold">History</p>
       </div>
 <!--      <div class="bar-list" (click)="soon()">-->
 <!--        <ion-img class="bar-icon" src="assets/icon/Apps-04.png"></ion-img>-->
@@ -43,12 +47,24 @@
     <div class="data" style="text-align: center;" *ngIf="getappointment.length < 1">
       <p>No Appointment available right now</p>
     </div>
-    <div class="data" style="text-align: center;" *ngIf="getappointment.length > 0">
+    <div style="text-align: center;" *ngIf="getappointment.length > 0">
       <div *ngFor="let data of getappointment" class="getappointment">
-        <p>Date : {{data.date}}</p>
-        <p>Time : {{data.time}}</p>
-        <p>Service : {{data.service}}</p>
-        <p>Status : {{data.status}}</p>
+        <ion-row>
+          <div style="text-align: center;margin: auto;">
+            <p>Name : {{data.name}}</p>
+            <p>Phone : {{data.tel_mobile}}</p>
+            <p>Date : {{data.date}}</p>
+            <p>Time : {{data.time}}</p>
+            <p>Service : {{data.service}}</p>
+            <p>Status : {{data.status}}</p>
+          </div>
+          <div *ngIf="user['roles'] === 'admin'">
+            <ion-button color="primary" (click)="changeStatus('accept',data.id)">Accept</ion-button>
+            <ion-button color="warning" (click)="changeStatus('reject',data.id)">Reject</ion-button>
+            <ion-button color="dark" (click)="changeStatus('completed',data.id)" *ngIf="data.status != 'pending'">Completed</ion-button>
+            <ion-button color="medium" (click)="contact(data.tel_mobile)">Contact</ion-button>
+          </div>
+        </ion-row>
       </div>
     </div>
   </div>

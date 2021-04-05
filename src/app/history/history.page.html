@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>history</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile">
+    <div class="data" style="text-align: center;" *ngIf="getappointment.length < 1">
+      <p>No Appointment available right now</p>
+    </div>
+    <div style="text-align: center;" *ngIf="getappointment.length > 0">
+      <div *ngFor="let data of getappointment" class="getappointment">
+        <ion-row>
+          <div style="text-align: center;margin: auto;">
+            <p>Name : {{data.name}}</p>
+            <p>Phone : {{data.tel_mobile}}</p>
+            <p>Date : {{data.date}}</p>
+            <p>Time : {{data.time}}</p>
+            <p>Service : {{data.service}}</p>
+            <p>Status : {{data.status}}</p>
+          </div>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+</ion-content>

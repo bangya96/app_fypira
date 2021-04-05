@@ -135,4 +135,16 @@ export class AuthService {
                 })
             )
     }
+
+    changeStatus(status,id) {
+        const headers = new HttpHeaders({
+            'Authorization': "Bearer "+this.token
+        });
+        return this.http.post(this.env.API_URL + 'api/changeStatus', {status:status, id:id},{ headers: headers })
+            .pipe(
+                tap(data => {
+                    return data;
+                })
+            )
+    }
 }

@@ -33,7 +33,7 @@ export class HomePage {
 
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
       this.appComponent.showLoader();
     this.authService.user().subscribe(
         user => {
@@ -51,10 +51,16 @@ export class HomePage {
           this.items = slider;
         }
     );
-    this.authService.getappointment().subscribe(
+    await this.authService.getappointment().subscribe(
         getappointment => {
-          this.getappointment = getappointment['data'];
-          console.log(getappointment)
+          console.log(this.user['roles'])
+          if (this.user['roles'] === 'admin'){
+            this.getappointment = getappointment['data'].filter(function(data:any) {
+              return data.completed === null;
+            });
+          } else {
+            this.getappointment = getappointment['data'];
+          }
         }
     );
 
@@ -77,6 +83,27 @@ export class HomePage {
 
   appointment(){
     this.navCtrl.navigateRoot('/appointment');
+  }
+
+  history(){
+    this.navCtrl.navigateRoot('/history');
+  }
+
+  contact(no){
+    window.open("https://wasap.my/6"+no,'_system', 'location=yes')
+  }
+
+  changeStatus(status, id){
+    this.authService.changeStatus(status, id).subscribe(
+        data => {
+          console.log(data);
+        },
+        error => {
+        },
+        () => {
+          this.ionViewWillEnter()
+        }
+    );
   }
 
   ionViewWillLeave(){
