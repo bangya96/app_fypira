@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController, Platform  } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { User } from 'src/app/models/user';
+import {Edit, User} from 'src/app/models/user';
 import { AlertService } from 'src/app/services/alert.service';
 import { NavController } from '@ionic/angular';
 import { AppComponent } from 'src/app/app.component';
@@ -16,6 +16,7 @@ export class HomePage {
   public items;
   public getappointment = [];
   user = User ;
+  edit = Edit ;
   public subscription;
 
   constructor(
@@ -38,29 +39,31 @@ export class HomePage {
     this.authService.user().subscribe(
         user => {
           this.user = user["success"];
+          this.edit['roles'] = user["success"]['roles'];
             this.appComponent.hideLoader();
         },
         error => {
           this.appComponent.logout();
             this.appComponent.hideLoader();
           console.log(error);
-        }
+        }, ()=> {
+          this.authService.getappointment().subscribe(
+              getappointment => {
+                console.log(this.user['roles'])
+                if (this.user['roles'] === 'admin'){
+                  this.getappointment = getappointment['data'].filter(function(data:any) {
+                    return data.completed === null;
+                  });
+                } else if (this.user['roles'] === 'user') {
+                  this.getappointment = getappointment['data'];
+                }
+              }
+          );
+        },
     );
     this.authService.slider().subscribe(
         slider => {
           this.items = slider;
-        }
-    );
-    await this.authService.getappointment().subscribe(
-        getappointment => {
-          console.log(this.user['roles'])
-          if (this.user['roles'] === 'admin'){
-            this.getappointment = getappointment['data'].filter(function(data:any) {
-              return data.completed === null;
-            });
-          } else {
-            this.getappointment = getappointment['data'];
-          }
         }
     );
 
@@ -87,6 +90,10 @@ export class HomePage {
 
   history(){
     this.navCtrl.navigateRoot('/history');
+  }
+
+    allusers(){
+    this.navCtrl.navigateRoot('/allusers');
   }
 
   contact(no){

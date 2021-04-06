@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AppComponent} from '../app.component';
 import {AuthService} from '../services/auth.service';
 import {NavController, Platform} from '@ionic/angular';
-import {User} from '../models/user';
+import {User, Edit} from '../models/user';
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +12,7 @@ import {User} from '../models/user';
 export class ProfilePage implements OnInit {
 
   user = User ;
+  edit = Edit ;
   public subscription;
 
   constructor(
@@ -34,8 +35,14 @@ export class ProfilePage implements OnInit {
     );
 
     this.subscription = this.platform.backButton.subscribe(()=>{
-      this.navCtrl.navigateRoot('/home');
+      navigator['app'].exitApp();
     });
+    this.appComponent.hideLoader();
+  }
+
+  viewuser(id){
+    this.edit['id'] = id;
+    this.navCtrl.navigateRoot('/edituser');
   }
 
   ionViewWillLeave(){

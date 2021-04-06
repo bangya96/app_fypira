@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>All Users</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row
+          style="margin: 20px; background: #1acdd340; padding: 10px; border-radius: 20px"
+          *ngFor="let data of data"
+  >
+    <div style="width: 80%">
+      Name : {{data.name}} <br>
+      Contact : {{data.tel_mobile}}
+    </div>
+    <div style="width: 20%">
+      <ion-button (click)="viewuser(data.id)" >Edit</ion-button>
+    </div>
+  </ion-row>
+
+</ion-content>

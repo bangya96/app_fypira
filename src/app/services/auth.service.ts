@@ -147,4 +147,40 @@ export class AuthService {
                 })
             )
     }
+
+    allUser() {
+        const headers = new HttpHeaders({
+            'Authorization': "Bearer "+this.token
+        });
+        return this.http.get(this.env.API_URL + 'api/allUser', { headers: headers })
+            .pipe(
+                tap(item => {
+                    return item;
+                })
+            )
+    }
+
+    idUser(id){
+        const headers = new HttpHeaders({
+            'Authorization': "Bearer "+this.token
+        });
+        return this.http.post(this.env.API_URL + 'api/idUser', {id:id},{ headers: headers })
+            .pipe(
+                tap(data => {
+                    return data;
+                })
+            )
+    }
+
+    saveUser(form, id){
+        const headers = new HttpHeaders({
+            'Authorization': "Bearer "+this.token
+        });
+        return this.http.post(this.env.API_URL + 'api/saveUser', {form:form,id:id},{ headers: headers })
+            .pipe(
+                tap(data => {
+                    return data;
+                })
+            )
+    }
 }

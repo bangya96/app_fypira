@@ -26,6 +26,10 @@
         <ion-img class="bar-icon" src="assets/icon/Apps-03.png"></ion-img>
         <p class="p-icon bold">Appointment</p>
       </div>
+      <div class="bar-list" (click)="allusers()" *ngIf="user['roles'] === 'admin'">
+        <ion-img class="bar-icon" src="assets/icon/Apps-02.png"></ion-img>
+        <p class="p-icon bold">All Users</p>
+      </div>
       <div class="bar-list" (click)="history()" *ngIf="user['roles'] === 'admin'">
         <ion-img class="bar-icon" src="assets/icon/Apps-04.png"></ion-img>
         <p class="p-icon bold">History</p>

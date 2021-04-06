@@ -3,16 +3,18 @@ import {MenuController, NavController, Platform} from "@ionic/angular";
 import {AuthService} from "../services/auth.service";
 import {AlertService} from "../services/alert.service";
 import {AppComponent} from "../app.component";
+import {Edit} from "../models/user";
 
 @Component({
-  selector: 'app-history',
-  templateUrl: './history.page.html',
-  styleUrls: ['./history.page.scss'],
+  selector: 'app-allusers',
+  templateUrl: './allusers.page.html',
+  styleUrls: ['./allusers.page.scss'],
 })
-export class HistoryPage implements OnInit {
+export class AllusersPage implements OnInit {
 
-  public getappointment = [];
+  public data = [];
   public subscription;
+  edit = Edit;
 
   constructor(
       private menu: MenuController,
@@ -21,6 +23,7 @@ export class HistoryPage implements OnInit {
       private navCtrl: NavController,
       private appComponent: AppComponent,
       private platform: Platform,
+      // private Edit: Edit,
   ) {
     this.menu.enable(true);
   }
@@ -28,13 +31,11 @@ export class HistoryPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     this.appComponent.showLoader();
-    this.authService.getappointment().subscribe(
-        getappointment => {
-          this.getappointment = getappointment['data'].filter(function(data:any) {
-            return data.completed != null;
-          });
+    await this.authService.allUser().subscribe(
+        data => {
+          this.data = data['data'];
         }
     );
 
@@ -42,6 +43,11 @@ export class HistoryPage implements OnInit {
       navigator['app'].exitApp();
     });
     this.appComponent.hideLoader();
+  }
+
+  viewuser(id){
+    this.edit['id'] = id;
+    this.navCtrl.navigateRoot('/edituser');
   }
 
   ionViewWillLeave(){

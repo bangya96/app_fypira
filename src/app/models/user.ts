@@ -17,3 +17,8 @@ export class User {
     created_at: string;
     updated_at: string;
 }
+
+export class Edit {
+    id: number;
+    roles: string;
+}

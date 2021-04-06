@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="allusers" *ngIf="edit['roles'] === 'admin'"></ion-back-button>
+      <ion-back-button defaultHref="profile" *ngIf="edit['roles'] === 'user'"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- form with input text and submit buttons with floating label -->
+  <form style="padding: 20px" #form="ngForm" (ngSubmit)="save(form)" method="post">
+    <ion-item>
+      <ion-label position="floating">Full Name</ion-label>
+      <ion-input ngModel  type="text" placeholder="Full Name" name="name" required value="{{data.name}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input ngModel  type="text" placeholder="Username" name="username" required value="{{data.username}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input ngModel  type="email" placeholder="Email" name="email" required value="{{data.email}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Contact Number</ion-label>
+      <ion-input ngModel  type="text" placeholder="01XXXXXXXX" name="tel_mobile" required value="{{data.tel_mobile}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Address Line 1</ion-label>
+      <ion-input ngModel  type="text" placeholder="Line 1" name="address1" required value="{{data.address1}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Address Line 2</ion-label>
+      <ion-input ngModel  type="text" placeholder="Line 2" name="address2" required value="{{data.address2}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Postcode</ion-label>
+      <ion-input ngModel  type="text" placeholder="Postcode" name="poscode" required value="{{data.poscode}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">City</ion-label>
+      <ion-input ngModel  type="text" placeholder="City" name="city" required value="{{data.city}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">State</ion-label>
+      <ion-input ngModel  type="text" placeholder="State" name="state" required value="{{data.state}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Gender</ion-label>
+      <ion-select ngModel value="{{data.gender}}" okText="Okay" cancelText="Dismiss" name="gender" required>
+        <ion-select-option value="male">Male</ion-select-option>
+        <ion-select-option value="female">Female</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="edit['roles'] === 'admin'">
+      <ion-label>Roles</ion-label>
+      <ion-select ngModel value="{{data.roles}}" okText="Okay" cancelText="Dismiss" name="roles" required>
+        <ion-select-option value="admin">Administrator</ion-select-option>
+        <ion-select-option value="user">User</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input ngModel  type="password" placeholder="Password (Insert to reset)" name="password" required></ion-input>
+    </ion-item>
+    <ion-button expand="block" fill="outline" type="submit">Save</ion-button>
+  </form>
+</ion-content>

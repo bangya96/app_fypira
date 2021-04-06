@@ -31,6 +31,16 @@ const routes: Routes = [
     path: 'history',
     loadChildren: () => import('./history/history.module').then( m => m.HistoryPageModule), canActivate: [AuthGuard]
   },
+  {
+    path: 'allusers',
+    loadChildren: () => import('./allusers/allusers.module').then( m => m.AllusersPageModule), canActivate: [AuthGuard]
+  },
+  {
+    path: 'edituser',
+    loadChildren: () => import('./edituser/edituser.module').then( m => m.EdituserPageModule), canActivate: [AuthGuard]
+  },
+
+
 
 
 ];

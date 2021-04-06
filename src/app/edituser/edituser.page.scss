@@ -1,0 +1,17 @@
+ion-toolbar{
+  --background: linear-gradient(to right, #1768f9, #1acdd3);
+}
+
+ion-content{
+  ion-icon{
+    zoom:8;
+    width: 100%;
+  }
+  ion-button{
+    margin-top: 10px;
+    &:last-child{
+      --color:#3b5998;
+      --border-color:#3b5998;
+    }
+  }
+}
